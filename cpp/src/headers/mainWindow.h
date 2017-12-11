@@ -16,6 +16,15 @@ class MainWindow : QMainWindow {
 
     private:
         QGridLayout* layout;
+
+        //Pane for time and date data
+        TimePane* timePane;
+
+        //pane for weather and internet speeds
+        WeatherStatPane* statPane;
+
+        //configures ui and grid layout
+        void configureUI();
 };
 
 #endif
