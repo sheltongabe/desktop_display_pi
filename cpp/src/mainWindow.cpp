@@ -1,25 +1,27 @@
 #include "headers/mainWindow.h"
 
 MainWindow::MainWindow() {
+    centralWidget = new QWidget();
     layout = new QGridLayout();
     timePane = new TimePane();
-    statPane = new StatPane();
+    statPane = new WeatherStatPane();
 
     //configure grid layout
     configureUI();
 }
 
-MainWindow::MainWindow(MainWindow& window) {
+/*MainWindow::MainWindow(MainWindow& window) {
     layout = window.layout;
     timePane = window.timePane;
     statPane = window.statPane;
-}
+}*/
 
 void MainWindow::configureUI() {
-    layout.addItem(timePane, 0, 0);
+    layout->addWidget(timePane, 0, 0);
     //layout.addItem(statPane, 1, 0);
 
-    setCentralWidget(layout);
+    centralWidget->setLayout(layout);
+    setCentralWidget(centralWidget);
 }
 
 MainWindow::~MainWindow() {

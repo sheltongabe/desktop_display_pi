@@ -2,6 +2,7 @@
 #define TIME_PANE
 
 #include <QWidget>
+#include <QGridLayout>
 #include <QDateTime>
 #include <QLabel>
 #include <QTimer>
@@ -20,8 +21,12 @@ class TimePane : public QWidget {
         void updateTime();
 
     private:
+        //layout to contain the labels
+        QGridLayout* layout;
+
         //labels for the gui date and time
-        QLabel* timeLbl, dateLbl;
+        QLabel* timeLbl;
+        QLabel* dateLbl;
 
         //timer to update the time and date
         QTimer* timer;

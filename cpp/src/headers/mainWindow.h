@@ -3,11 +3,12 @@
 
 #include <QMainWindow>
 #include <QGridLayout>
+#include <QWidget>
 
 #include "timePane.h"
 #include "weatherStatPane.h"
 
-class MainWindow : QMainWindow {
+class MainWindow : public QMainWindow {
     public:
         MainWindow();
         MainWindow(MainWindow& window);
@@ -15,6 +16,7 @@ class MainWindow : QMainWindow {
         ~MainWindow();
 
     private:
+        QWidget* centralWidget;
         QGridLayout* layout;
 
         //Pane for time and date data
