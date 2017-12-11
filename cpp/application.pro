@@ -1,6 +1,8 @@
 QT += widgets
 QT += core
 
-HEADERS =   headers/
+HEADERS =   src/headers/mainWindow.h \
+            src/headers/timePane.h \
+            src/headers/weatherStatPane.h
 
-SOURCES =   main.cpp
+SOURCES =   src/main.cpp
