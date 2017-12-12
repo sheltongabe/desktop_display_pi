@@ -25,7 +25,12 @@ TimePane::TimePane() {
 }*/
 
 void TimePane::updateTime() {
-    timeLbl->setText(QDateTime::currentDateTime().toString());
+    //grab the current date/time
+    QDateTime current = QDateTime::currentDateTime();
+
+    //output it to the QLabels
+    timeLbl->setText(current.time().toString());
+    dateLbl->setText(current.date().toString());
 }
 
 TimePane::~TimePane() {
