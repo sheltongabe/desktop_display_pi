@@ -32,3 +32,6 @@
 *.app
 cpp/application
 cpp/Makefile
+cpp/moc_mainWindow.cpp
+cpp/moc_timePane.cpp
+cpp/moc_weatherStatPane.cpp
