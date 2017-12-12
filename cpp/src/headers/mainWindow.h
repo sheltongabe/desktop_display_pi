@@ -9,6 +9,9 @@
 #include "weatherStatPane.h"
 
 class MainWindow : public QMainWindow {
+
+    Q_OBJECT
+
     public:
         MainWindow();
         MainWindow(MainWindow& window);

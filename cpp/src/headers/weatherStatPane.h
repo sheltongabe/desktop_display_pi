@@ -6,6 +6,9 @@
 #include <QTimer>
 
 class WeatherStatPane : public QWidget {
+
+    Q_OBJECT
+
     public:
         WeatherStatPane();
         WeatherStatPane(WeatherStatPane& pane);

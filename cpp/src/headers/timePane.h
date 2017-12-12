@@ -8,6 +8,9 @@
 #include <QTimer>
 
 class TimePane : public QWidget {
+
+    Q_OBJECT
+
     public:
 
         const static int UPDATE_TIME = 500;
