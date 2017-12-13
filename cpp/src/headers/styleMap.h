@@ -10,6 +10,7 @@ class StyleMap {
         StyleMap(StyleMap& map);
 
         QString getStyle(QString key);
+        void storeStyle(QString key, QString style);
 
         ~StyleMap();
 
