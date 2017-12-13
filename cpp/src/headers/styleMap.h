@@ -3,14 +3,19 @@
 
 #include <QHash>
 #include <QString>
+#include <QStringList>
+#include <QVector>
 
 class StyleMap {
     public:
         StyleMap();
-        StyleMap(StyleMap& map);
+        StyleMap(QVector<QString> styles);
+        StyleMap(StyleMap& styles);
 
         QString getStyle(QString key);
         void storeStyle(QString key, QString style);
+
+        QHash<QString, QString> getHash() { return styles; }
 
         ~StyleMap();
 
