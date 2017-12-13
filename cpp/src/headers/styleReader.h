@@ -1,7 +1,11 @@
 #ifndef STYLE_READER
 #define STYLE_READER
 
+#include<QVector>
 #include <QString>
+#include <QFile>
+#include <QTextStream>
+#include <QIODevice>
 
 class StyleReader {
 
@@ -9,7 +13,7 @@ class StyleReader {
         StyleReader();
         StyleReader(StyleReader& reader);
 
-        static QString read(QString fileName);
+        static QVector<QString> read(QString fileName);
 
         ~StyleReader();
 

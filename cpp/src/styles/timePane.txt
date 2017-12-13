@@ -1,4 +1,4 @@
-timeLbl:
+timeLbl
 color: red;
 background-color: dark-gray;
-
+~
