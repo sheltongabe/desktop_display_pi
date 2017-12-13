@@ -9,6 +9,8 @@ class StyleMap {
         StyleMap();
         StyleMap(StyleMap& map);
 
+        QString getStyle(QString key);
+
         ~StyleMap();
 
     private:
