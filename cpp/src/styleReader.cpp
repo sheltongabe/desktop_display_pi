@@ -21,17 +21,23 @@ QVector<QString> StyleReader::read(QString fileName) {
 
     //while we are not at the end of the file
     while(!inFile.atEnd()) {
-        QString key = inFile.readLine() + "=";
+        QString key = inFile.device()->readLine().append("=");
 
+        char buf[1];
         //while the next char is not a ~, seperator for styles
-        while(inFile.device()->peek(1)[0] != '~') {
-            key += inFile.readLine();
+        inFile.device()->peek(buf, 1);
+        while(buf[0] != '~' && !inFile.atEnd()) {
+            key += inFile.device()->readLine();
+
+            inFile.device()->peek(buf, 1);
+
         }
 
-        results.push_back(key);
+        results.push_back(key.remove('\n'));
     }
 
     return results;
+
 }
 
 StyleReader::~StyleReader() {

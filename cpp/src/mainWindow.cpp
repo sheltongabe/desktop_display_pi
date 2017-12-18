@@ -7,7 +7,7 @@ MainWindow::MainWindow() {
     statPane = new WeatherStatPane();
 
     //create styleMap from file
-    styleMap = new StyleMap(StyleReader::read(":/styles/mainWindow.txt"));
+    styleMap = new StyleMap(StyleReader::read(":/styles/timePane.txt"));
 
     //configure grid layout
     configureUI();
@@ -18,9 +18,10 @@ MainWindow::MainWindow() {
     timePane = window.timePane;
     statPane = window.statPane;
 }*/
-
+#include <iostream>
 void MainWindow::configureUI() {
     timePane->setStyleSheet(styleMap->getStyle("timeLbl"));
+    std::cout << timePane->styleSheet().toStdString() << std::endl;
     layout->addWidget(timePane, 0, 0);
     //layout.addItem(statPane, 1, 0);
 
