@@ -6,6 +6,9 @@ MainWindow::MainWindow() {
     timePane = new TimePane();
     statPane = new WeatherStatPane();
 
+    //create styleMap from file
+    styleMap = new StyleMap(StyleReader::read(":/styles/mainWindow.txt"));
+
     //configure grid layout
     configureUI();
 }
@@ -17,6 +20,7 @@ MainWindow::MainWindow() {
 }*/
 
 void MainWindow::configureUI() {
+    timePane->setStyleSheet(styleMap->getStyle("timeLbl"));
     layout->addWidget(timePane, 0, 0);
     //layout.addItem(statPane, 1, 0);
 

@@ -8,12 +8,12 @@ StyleReader::StyleReader(StyleReader& reader) {
 
 }
 
-QVector<QString> read(QString filename) {
+QVector<QString> StyleReader::read(QString fileName) {
     QVector<QString> results;
 
     //open file
     QFile file(fileName);
-    if(!file.open(QIODevice::ReadOnly | QIODevice::Text)
+    if(!file.open(QIODevice::ReadOnly | QIODevice::Text))
         return results;
     
     //create a textstream with the file
@@ -24,7 +24,7 @@ QVector<QString> read(QString filename) {
         QString key = inFile.readLine() + "=";
 
         //while the next char is not a ~, seperator for styles
-        while(inFile.device()->peek(1) != '~') {
+        while(inFile.device()->peek(1)[0] != '~') {
             key += inFile.readLine();
         }
 

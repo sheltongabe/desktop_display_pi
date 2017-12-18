@@ -7,7 +7,7 @@ StyleMap::StyleMap() {
 StyleMap::StyleMap(QVector<QString> styles) {
     for(int i = 0; i < styles.size(); i++) {
         QStringList pair = styles[i].split('=');
-        styles[pair[0].toString()] = pair[1].toString();
+        this->styles[pair[0]] = pair[1];
     }
 }
 
@@ -15,11 +15,11 @@ StyleMap::StyleMap(StyleMap& styles) {
     this->styles = styles.styles;
 }
 
-QString getStyle(QString key) {
+QString StyleMap::getStyle(QString key) {
     return styles[key];
 }
 
-void storeStyle(QString key, QString style) {
+void StyleMap::storeStyle(QString key, QString style) {
     styles[key] = style;
 }
 

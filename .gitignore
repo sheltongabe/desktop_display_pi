@@ -35,3 +35,4 @@ cpp/Makefile
 cpp/moc_mainWindow.cpp
 cpp/moc_timePane.cpp
 cpp/moc_weatherStatPane.cpp
+cpp/qrc_application.cpp

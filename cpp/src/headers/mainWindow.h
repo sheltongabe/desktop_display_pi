@@ -7,6 +7,8 @@
 
 #include "timePane.h"
 #include "weatherStatPane.h"
+#include "styleMap.h"
+#include "styleReader.h"
 
 class MainWindow : public QMainWindow {
 
@@ -21,6 +23,7 @@ class MainWindow : public QMainWindow {
     private:
         QWidget* centralWidget;
         QGridLayout* layout;
+        StyleMap* styleMap;
 
         //Pane for time and date data
         TimePane* timePane;
