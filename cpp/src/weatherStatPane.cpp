@@ -10,7 +10,6 @@ WeatherStatPane::WeatherStatPane() {
     layout->addWidget(upSpeedLbl, 1, 0);
     layout->setSpacing(0);
     layout->setMargin(0);
-
     setLayout(layout);
 
     //configure update timer

@@ -22,10 +22,10 @@ MainWindow::MainWindow() {
     timePane = window.timePane;
     statPane = window.statPane;
 }*/
-#include <iostream>
+
 void MainWindow::configureUI() {
     timePane->setStyleSheet(styleMap->getStyle("timeLbl"));
-    std::cout << timePane->styleSheet().toStdString() << std::endl;
+
     layout->addWidget(timePane, 0, 0);
     layout->addWidget(statPane, 1, 0);
 
