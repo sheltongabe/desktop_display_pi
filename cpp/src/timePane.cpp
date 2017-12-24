@@ -10,6 +10,10 @@ TimePane::TimePane() {
     dateLbl = new QLabel("Date");
     layout->addWidget(dateLbl);
 
+    //sets the margin around the elements to 0
+    layout->setMargin(0);
+    layout->setSpacing(0);
+
     //add layout to widget
     setLayout(layout);
 

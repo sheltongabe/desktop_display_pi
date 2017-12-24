@@ -1,4 +1,8 @@
 timeLbl
 color: red;
-background-color: dark-gray;
+font-size: 32px;
+background-color: blue;
+margin: 0px;
+padding: 0;
+border: 3px pink solid;
 ~
