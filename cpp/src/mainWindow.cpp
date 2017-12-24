@@ -27,7 +27,7 @@ void MainWindow::configureUI() {
     timePane->setStyleSheet(styleMap->getStyle("timeLbl"));
     std::cout << timePane->styleSheet().toStdString() << std::endl;
     layout->addWidget(timePane, 0, 0);
-    //layout.addItem(statPane, 1, 0);
+    layout->addWidget(statPane, 1, 0);
 
     centralWidget->setLayout(layout);
     setCentralWidget(centralWidget);
