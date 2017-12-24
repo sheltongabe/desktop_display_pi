@@ -6,6 +6,10 @@ MainWindow::MainWindow() {
     timePane = new TimePane();
     statPane = new WeatherStatPane();
 
+    //set the layout margin to 0
+    layout->setMargin(0);
+    layout->setSpacing(0);
+
     //create styleMap from file
     styleMap = new StyleMap(StyleReader::read(":/styles/timePane.txt"));
 
