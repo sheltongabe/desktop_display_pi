@@ -1,11 +1,8 @@
 #ifndef TIME_PANE
 #define TIME_PANE
 
-#include <QWidget>
-#include <QGridLayout>
 #include <QDateTime>
 #include <QLabel>
-#include <QTimer>
 
 #include "pane.h"
 

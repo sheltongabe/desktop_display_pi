@@ -1,11 +1,8 @@
 #ifndef WEATHER_STAT_PANE_H
 #define WEATHER_STAT_PANE_H
 
-#include <QWidget>
-#include <QGridLayout>
 #include <QLabel>
 #include <QString>
-#include <QTimer>
 
 #include "pane.h"
 
