@@ -32,6 +32,8 @@ QVector<QString> StyleReader::read(QString fileName) {
             inFile.device()->peek(buf, 1);
 
         }
+        //consume the '~' marking character
+        inFile.device()->readLine();
 
         results.push_back(key.remove('\n'));
     }
