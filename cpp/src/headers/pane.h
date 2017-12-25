@@ -18,6 +18,9 @@ class Pane : public QWidget {
 
         ~Pane();
 
+        QGridLayout* getLayout() { return layout; }
+        StyleMap* getStyleMap() { return styleMap; }
+
     public slots:
         virtual void updateWidgets() = 0;
 
