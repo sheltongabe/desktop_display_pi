@@ -5,17 +5,11 @@ WeatherStatPane::WeatherStatPane() {
     downSpeedLbl = new QLabel();
     upSpeedLbl = new QLabel();
 
-    layout = new QGridLayout();
     layout->addWidget(downSpeedLbl, 0, 0);
     layout->addWidget(upSpeedLbl, 1, 0);
     layout->setSpacing(0);
     layout->setMargin(0);
     setLayout(layout);
-
-    //configure update timer
-    timer = new QTimer(this);
-    connect(timer, SIGNAL(timeout()), this, SLOT(updateWidgets()));
-    timer->start(UPDATE_TIME);
 
 }
 

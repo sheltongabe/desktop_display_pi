@@ -7,34 +7,26 @@
 #include <QString>
 #include <QTimer>
 
-class WeatherStatPane : public QWidget {
+#include "pane.h"
 
-    Q_OBJECT
-
+class WeatherStatPane : public Pane {
     public:
-        //update interval of 5 seconds
-        const int UPDATE_TIME = 5000;
-
         WeatherStatPane();
         WeatherStatPane(WeatherStatPane& pane);
 
         ~WeatherStatPane();
-
+    
     public slots:
-        void updateWidgets();
+        virtual void updateWidgets();
 
     private:
-        //layout for pane
-        QGridLayout* layout;
+        const int UPDATE_INTERVAL = 5000;
 
         //Labels for gui for temperature
         QLabel* farenheitLbl, *celsiusLbl;
 
         //Labels for internet speed
         QLabel* downSpeedLbl, *upSpeedLbl;
-
-        //timer for update
-        QTimer* timer;
 };
 
 #endif

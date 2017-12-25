@@ -4,6 +4,7 @@ QT += core
 RESOURCES = application.qrc
 
 HEADERS =   src/headers/mainWindow.h \
+            src/headers/pane.h \
             src/headers/timePane.h \
             src/headers/weatherStatPane.h \
             src/headers/styleReader.h \
@@ -11,6 +12,7 @@ HEADERS =   src/headers/mainWindow.h \
 
 SOURCES =   src/main.cpp \
             src/mainWindow.cpp \
+            src/pane.cpp \
             src/timePane.cpp \
             src/weatherStatPane.cpp \
             src/styleReader.cpp \

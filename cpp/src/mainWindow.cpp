@@ -10,9 +10,6 @@ MainWindow::MainWindow() {
     layout->setMargin(0);
     layout->setSpacing(0);
 
-    //create styleMap from file
-    styleMap = new StyleMap(StyleReader::read(":/styles/timePane.txt"));
-
     //configure grid layout
     configureUI();
 }
@@ -24,8 +21,6 @@ MainWindow::MainWindow() {
 }*/
 
 void MainWindow::configureUI() {
-    timePane->setStyleSheet(styleMap->getStyle("timeLbl"));
-
     layout->addWidget(timePane, 0, 0);
     layout->addWidget(statPane, 1, 0);
 

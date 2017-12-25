@@ -1,9 +1,6 @@
 #include "headers/timePane.h"
 
 TimePane::TimePane() {
-    //build the layout
-    layout = new QGridLayout();
-
     timeLbl = new QLabel("Time");
     layout->addWidget(timeLbl);
 
@@ -14,13 +11,13 @@ TimePane::TimePane() {
     layout->setMargin(0);
     layout->setSpacing(0);
 
+    //create styleMap from file
+    styleMap = new StyleMap(StyleReader::read(":/styles/timePane.txt"));
+    timeLbl->setStyleSheet(styleMap->getStyle("timeLbl"));
+    dateLbl->setStyleSheet(styleMap->getStyle("dateLbl"));
+
     //add layout to widget
     setLayout(layout);
-
-    //configure the timer to update the date
-    timer = new QTimer(this);
-    connect(timer, SIGNAL(timeout()), this, SLOT(updateTime()));
-    timer->start(UPDATE_TIME);
 }
 
 /*TimePane::TimePane(TimePane& pane) {
@@ -28,7 +25,7 @@ TimePane::TimePane() {
     dateLbl = dateLbl;
 }*/
 
-void TimePane::updateTime() {
+void TimePane::updateWidgets() {
     //grab the current date/time
     QDateTime current = QDateTime::currentDateTime();
 

@@ -6,3 +6,7 @@ margin: 0px;
 padding: 0;
 border: 3px pink solid;
 ~
+dateLbl
+color: pink;
+background-color: yellow;
+~
