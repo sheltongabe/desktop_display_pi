@@ -6,19 +6,23 @@ WeatherStatPane::WeatherStatPane() {
     upSpeedLbl = new QLabel();
 
     layout->addWidget(downSpeedLbl, 0, 0);
-    layout->addWidget(upSpeedLbl, 1, 0);
+    layout->addWidget(upSpeedLbl, 0, 1);
     layout->setSpacing(0);
     layout->setMargin(0);
+
+    //setup stylesheet
+    styleMap = new StyleMap(StyleReader::read(":/styles/statPane.txt"));
+    downSpeedLbl->setStyleSheet(styleMap->getStyle("downSpeedLbl"));
+    upSpeedLbl->setStyleSheet(styleMap->getStyle("upSpeedLbl"));
+
+
     setLayout(layout);
 
 }
-#include <iostream>
 void WeatherStatPane::updateWidgets() {
     //values for testing
     double downSpeed = 15.643;
     double upSpeed = 2.354;
-
-    std::cout << dataFileName.toStdString() << std::endl;
 
     //setup file input
     QFile file(dataFileName);
@@ -32,11 +36,13 @@ void WeatherStatPane::updateWidgets() {
 
     file.close();
 
-    QString downText = "Download Speed: ";
+    QString downText = "Internet Speed: ";
     downText.append(QString::number(downSpeed));
+    downText.append("Mbs down");
 
-    QString upText = "Upload Speed: ";
+    QString upText = " / ";
     upText.append(QString::number(upSpeed));
+    upText.append("Mbs up");
 
     downSpeedLbl->setText(downText);
     upSpeedLbl->setText(upText);

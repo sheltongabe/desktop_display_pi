@@ -1,5 +1,6 @@
 <!DOCTYPE RCC><RCC version="1.0">
 <qresource>
     <file>styles/timePane.txt</file>
+    <file>styles/statPane.txt</file>
 </qresource>
 </RCC>
