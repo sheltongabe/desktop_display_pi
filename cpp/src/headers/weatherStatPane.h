@@ -3,6 +3,9 @@
 
 #include <QLabel>
 #include <QString>
+#include <QFile>
+#include <QTextStream>
+#include <QIODevice>
 
 #include "pane.h"
 
@@ -18,6 +21,7 @@ class WeatherStatPane : public Pane {
 
     private:
         const int UPDATE_INTERVAL = 5000;
+        const QString dataFileName = QString("data.txt");
 
         //Labels for gui for temperature
         QLabel* farenheitLbl, *celsiusLbl;

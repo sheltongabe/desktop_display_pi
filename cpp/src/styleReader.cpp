@@ -37,6 +37,7 @@ QVector<QString> StyleReader::read(QString fileName) {
 
         results.push_back(key.remove('\n'));
     }
+    file.close();
 
     return results;
 

@@ -6,7 +6,6 @@
 #include <QFile>
 #include <QTextStream>
 #include <QIODevice>
-#include <iostream>
 
 class StyleReader {
 

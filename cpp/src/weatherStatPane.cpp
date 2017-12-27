@@ -12,11 +12,25 @@ WeatherStatPane::WeatherStatPane() {
     setLayout(layout);
 
 }
-
+#include <iostream>
 void WeatherStatPane::updateWidgets() {
     //values for testing
     double downSpeed = 15.643;
     double upSpeed = 2.354;
+
+    std::cout << dataFileName.toStdString() << std::endl;
+
+    //setup file input
+    QFile file(dataFileName);
+    if(!file.open(QIODevice::ReadOnly | QIODevice::Text))
+        return;
+    QTextStream dataFile(&file);
+
+    //read in the download and upload speed
+    downSpeed = dataFile.readLine().toDouble();
+    upSpeed = dataFile.readLine().toDouble();
+
+    file.close();
 
     QString downText = "Download Speed: ";
     downText.append(QString::number(downSpeed));
