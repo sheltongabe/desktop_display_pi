@@ -39,3 +39,4 @@ cpp/qrc_application.cpp
 .vscode/launch.json
 cpp/moc_pane.cpp
 python3/data.txt
+python3/application

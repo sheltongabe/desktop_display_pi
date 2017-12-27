@@ -3,6 +3,8 @@ QT += core
 
 RESOURCES = application.qrc
 
+DESTDIR = ../python3/
+
 HEADERS =   src/headers/mainWindow.h \
             src/headers/pane.h \
             src/headers/timePane.h \
