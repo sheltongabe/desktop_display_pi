@@ -38,3 +38,4 @@ cpp/moc_weatherStatPane.cpp
 cpp/qrc_application.cpp
 .vscode/launch.json
 cpp/moc_pane.cpp
+python3/data.txt
