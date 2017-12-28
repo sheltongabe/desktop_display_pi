@@ -13,8 +13,8 @@ while(True):
 
     #setup the text to write to the file
     text = "";
-    text += str(s.download() / 1000000) + "\n";
-    text += str(s.upload() / 1000000) + "\n";
+    text += str(round(s.download() / 1000000, 2)) + "\n";
+    text += str(round(s.upload() / 1000000, 2)) + "\n";
 
     #open a file to write to
     file = open("data.txt", "w");
