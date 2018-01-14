@@ -23,6 +23,12 @@ currentTime = lambda: int(round(time.time() * 1000));
 
 #function for testing the downloadSpeed
 def downloadSpeed():
+    """
+    a file that marks a start time and downloads a file.
+    after finishing downloading the file it marks the end time
+    and calculates the download speed
+    returns the download speed in mb/s
+    """
     #measure the download speed
     #variable for start time
     startTime = currentTime();
