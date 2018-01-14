@@ -7,4 +7,4 @@ apt install qt5-default
 
 #setup speedtest for python
 apt install pip3
-pip3 install speedtest-cli
+pip3 install requests
