@@ -3,6 +3,7 @@
 
 #include <QLabel>
 #include <QString>
+#include <QChar>
 #include <QFile>
 #include <QTextStream>
 #include <QIODevice>
