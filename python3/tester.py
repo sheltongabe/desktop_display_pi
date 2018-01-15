@@ -80,8 +80,15 @@ def main():
 
         #setup the text to write to the file
         text = "";
+
+        #output speed
         text += str(round(speed, 2)) + "\n";
+
+        #output tempFarenheit
         text += str(round(temp, 2)) + "\n";
+
+        #output tempCelsius
+        text += str(round((5.0 / 9.0) * (temp - 32), 1)) + "\n";
 
         #open a file to write to
         file = open("data.txt", "w");
