@@ -25,10 +25,10 @@ class WeatherStatPane : public Pane {
         const QString dataFileName = QString("data.txt");
 
         //Labels for gui for temperature
-        QLabel* farenheitLbl, *celsiusLbl;
+        QLabel* tempLbl;
 
         //Labels for internet speed
-        QLabel* downSpeedLbl, *upSpeedLbl;
+        QLabel* speedLbl;
 };
 
 #endif

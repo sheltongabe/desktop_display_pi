@@ -2,18 +2,18 @@
 
 WeatherStatPane::WeatherStatPane() {
     //Create the widgets
-    downSpeedLbl = new QLabel();
-    farenheitLbl = new QLabel();
+    speedLbl = new QLabel();
+    tempLbl = new QLabel();
 
-    layout->addWidget(downSpeedLbl, 0, 0);
-    layout->addWidget(farenheitLbl, 1, 0);
+    layout->addWidget(speedLbl, 0, 0);
+    layout->addWidget(tempLbl, 1, 0);
     layout->setSpacing(0);
     layout->setMargin(0);
 
     //setup stylesheet
     styleMap = new StyleMap(StyleReader::read(":/styles/statPane.txt"));
-    downSpeedLbl->setStyleSheet(styleMap->getStyle("downSpeedLbl"));
-    farenheitLbl->setStyleSheet(styleMap->getStyle("farenheitLbl"));
+    speedLbl->setStyleSheet(styleMap->getStyle("speedLbl"));
+    tempLbl->setStyleSheet(styleMap->getStyle("tempLbl"));
 
     setLayout(layout);
 
@@ -50,11 +50,11 @@ void WeatherStatPane::updateWidgets() {
     tempText.append(QString::number(tempCelsius));
     tempText.append(QChar(0260)).append("C");
 
-    downSpeedLbl->setText(downText);
-    farenheitLbl->setText(tempText);
+    speedLbl->setText(downText);
+    tempLbl->setText(tempText);
 }
 
 WeatherStatPane::~WeatherStatPane() {
-    delete downSpeedLbl;
-    delete farenheitLbl;
+    delete speedLbl;
+    delete tempLbl;
 }
