@@ -33,3 +33,15 @@ MainWindow::~MainWindow() {
     delete timePane;
     delete statPane;
 }
+
+// --- Event Handlers ---
+void MainWindow::mouseDoubleClickEvent(QMouseEvent* event) {
+    if(blState == ON) {
+        system(BL_OFF);
+        blState = OFF;
+    }
+    else {
+        system(BL_ON);
+        blState = ON;
+    }
+}
