@@ -17,8 +17,8 @@ FILE_NAME = "file";
 
 #Size of file in Megabits
 FILE_SIZE = 12 * 8;
-#lambda for current time in milliseconds
 
+#get the current time
 currentTime = lambda: int(round(time.time() * 1000));
 
 #function for testing the downloadSpeed
