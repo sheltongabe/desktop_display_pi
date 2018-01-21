@@ -1,4 +1,11 @@
-
+VALID_IMPORT = True;
+try:
+    import PCF8591 as ADC;
+    import RPi.GPIO as GPIO;
+    import time, math;
+except ImportError:
+    print("error installing Raspberry Pi Sensor Libraries, run setup.sh to install");
+    VALID_IMPORT = False;
 
 class PI:
     """pi.py
@@ -9,21 +16,14 @@ class PI:
         """ pi.init()
             constructor to initialize class
         """
-        self._valid_import = True;
-        try:
-            import PCF8591 as ADC;
-            import RPi.GPIO as GPIO;
-            import time, math;
-        except ImportError:
-            print("error installing Raspberry Pi Sensor Libraries, run setup.sh to install");
-            self._valid_import = False;
+        self._valid_import = VALID_IMPORT;
         
         #setup constants
         self._DO = 17;
         if(self._valid_import):
             GPIO.setmode(GPIO.BCM);
-            ADC.setup(0x84);
-            GPIO.setup(DO, GPIO.IN);
+            ADC.setup(0x48);
+            GPIO.setup(self._DO, GPIO.IN);
     
     def valid_import(self):
         return self._valid_import;
