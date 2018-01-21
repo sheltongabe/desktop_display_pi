@@ -1,14 +1,14 @@
-downSpeedLbl
+speedLbl
 color: #ced5e8;
 font-size: 48px;
 background-color: #47494f;
 ~
-farenheitLbl
+tempLbl
 color: #ced5e8;
 font-size: 48px;
 background-color: #47494f;
 ~
-celsiusLbl
+intTempLbl
 color: #ced5e8;
 font-size: 48px;
 background-color: #47494f;

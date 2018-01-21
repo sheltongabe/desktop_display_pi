@@ -9,11 +9,39 @@ class PI:
         """ pi.init()
             constructor to initialize class
         """
-        pass;
+        self._valid_import = True;
+        try:
+            import PCF8591 as ADC;
+            import RPi.GPIO as GPIO;
+            import time, math;
+        except ImportError:
+            print("error installing Raspberry Pi Sensor Libraries, run setup.sh to install");
+            self._valid_import = False;
+        
+        #setup constants
+        self._DO = 17;
+        if(self._valid_import):
+            GPIO.setmode(GPIO.BCM);
+            ADC.setup(0x84);
+            GPIO.setup(DO, GPIO.IN);
+    
+    def valid_import(self):
+        return self._valid_import;
 
-    def getTemp():
+    def getTemp(self):
         """ pi.getTemp()
             method that returns the temperature 
             returned by rasperrypi.
         """
-        pass;
+        if(self.valid_import()):
+            return self.analogToTemp(ADC.read(0));
+        else:
+            return None;
+
+    def analogToTemp(self, analog):
+        Vr = 5 * float(analog) / 255;
+        Rt = 10000 * Vr / (5 - Vr);
+        temp = 1 / (((math.log(Rt / 10000)) / 3950) + (1 / (273.15 + 25)));
+        temp -= 273.15;
+
+        return temp;

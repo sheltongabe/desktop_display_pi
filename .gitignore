@@ -30,6 +30,10 @@
 *.exe
 *.out
 *.app
+
+#python3
+python3/__pycache__/*
+
 cpp/application
 cpp/Makefile
 cpp/moc_mainWindow.cpp

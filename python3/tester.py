@@ -1,6 +1,23 @@
-import time;
-import requests, shutil;
-from bs4 import BeautifulSoup;
+import time, threading;
+from pi import PI;
+
+#variable for if the main loop should run
+shouldRun = True;
+
+#import requests and shutil
+try:
+    import requests, shutil;
+except ImportError:
+    print("Please run setup.sh to install requests");
+    shouldRun = False;
+
+#import bs4 and if unsuccessful set flag to exit
+try:
+    from bs4 import BeautifulSoup;
+except ImportError:
+    print("Please run setup.sh to install beautiful soup 4");
+    shouldRun = False;
+
 import os;
 
 #interval of 30 sec
@@ -22,7 +39,7 @@ FILE_SIZE = 12 * 8;
 currentTime = lambda: int(round(time.time() * 1000));
 
 #function for testing the downloadSpeed
-def downloadSpeed():
+def downloadSpeed(ret):
     """
     a file that marks a start time and downloads a file.
     after finishing downloading the file it marks the end time
@@ -33,62 +50,103 @@ def downloadSpeed():
     #variable for start time
     startTime = currentTime();
 
-    #open and download the file
-    r = requests.get(DOWNLOAD_URL, stream = True);
-    
-    #read the connection and write it to a file
-    with open (FILE_NAME, 'wb') as file:
-       shutil.copyfileobj(r.raw, file);
+    try:
+        #open and download the file
+        r = requests.get(DOWNLOAD_URL, stream = True);
+        
+        #read the connection and write it to a file
+        with open (FILE_NAME, 'wb') as file:
+            shutil.copyfileobj(r.raw, file);
 
-    #store the change in time in seconds
-    deltaTime = (currentTime() - startTime) / 1000.0;
+        #store the change in time in seconds
+        deltaTime = (currentTime() - startTime) / 1000.0;
 
-    #delete the file
-    os.remove(FILE_NAME);
+        #delete the file
+        os.remove(FILE_NAME);
 
-    #download speed = FILE_SIZE / deltaTime -> Kb/Sec
-    return float(FILE_SIZE) / deltaTime;
+        #download speed = FILE_SIZE / deltaTime -> Kb/Sec
+        ret[0] = float(FILE_SIZE) / deltaTime;
+    except:
+        ret[0] = "-";
 
-def temperature():
+def temperature(ret):
     """
         function that takes connects and downloads an html page from weather.com
         it will then use beautiful soup to get the temperature, then deleting the
         file and returning the temperature as a float
     """
-    #download a file for weather.com with the passed zip-code and country
-    r = requests.get(WEATHER_URL, stream = True);
-    with open(FILE_NAME + ".html", 'w') as file:
-        file.write(r.text);
+    try:
+        #download a file for weather.com with the passed zip-code and country
+        r = requests.get(WEATHER_URL, stream = True);
+        with open(FILE_NAME + ".html", 'w') as file:
+            file.write(r.text);
 
-    #create a soup from the weather.com html file
-    with open(FILE_NAME + ".html") as fp:
-        soup = BeautifulSoup(fp, "html.parser");
+        #create a soup from the weather.com html file
+        with open(FILE_NAME + ".html") as fp:
+            soup = BeautifulSoup(fp, "html.parser");
 
-    #grab the temperature
-    soup = soup.find(attrs = {"class": "today_nowcard-temp"}).span.contents[0];
+        #grab the temperature
+        soup = soup.find(attrs = {"class": "today_nowcard-temp"}).span.contents[0];
 
-    #delete the file
-    os.remove(FILE_NAME + ".html");
+        #delete the file
+        os.remove(FILE_NAME + ".html");
 
-    return float(soup);
+        ret[0] = float(soup);
+    except:
+        ret[0] = "-";
 
 def main():
-    while(True):
+    pi = PI();
+    while(shouldRun):
+        #create variables
+        speed = [0.0];
+        temp = [0.0];
 
-        speed = downloadSpeed();
-        temp = temperature();
+        #get the download speed on a seperate thread
+        t = threading.Thread(target=downloadSpeed, args=[speed]);
+        t.start();
+
+        #get the temperature
+        temperature(temp);
+
+        #get the internal temp in degrees celsius
+        tempIntCel = 0.0;
+        if(pi.valid_import):
+            tempIntCel = pi.getTemp();
+
+        #wait for the speed testing thread to be done
+        t.join();
 
         #setup the text to write to the file
         text = "";
 
-        #output speed
-        text += str(round(speed, 2)) + "\n";
+        #if download speed is valid
+        if(speed[0] != "-"):
+            #output speed
+            text += str(round(speed[0], 2)) + "\n";
+        else:
+            #output a hyphen
+            text += speed[0] + "\n";
 
-        #output tempFarenheit
-        text += str(round(temp, 2)) + "\n";
+        #if temp was valid
+        if(temp[0] != "-"):
+            #output tempFarenheit
+            text += str(round(temp[0], 2)) + "\n";
 
-        #output tempCelsius
-        text += str(round((5.0 / 9.0) * (temp - 32), 1)) + "\n";
+            #output tempCelsius
+            text += str(round((5.0 / 9.0) * (temp[0] - 32), 1)) + "\n";
+        else:
+            #if temp failed write two hyphens for temps
+            text += temp[0] + "\n";
+            text += temp[0] + "\n";
+
+        #if the pi had valid imports
+        if(pi.valid_import()):
+            text += str(round(tempIntCel, 2)) + "\n";
+            tempIntFar = (9.0 / 5.0) * tempIntCel + 32;
+            text += str(round(tempIntFar, 2)) + "\n";
+        else:
+            text += "-\n-\n"
 
         #open a file to write to
         file = open("data.txt", "w");
