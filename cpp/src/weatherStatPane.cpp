@@ -20,9 +20,9 @@ WeatherStatPane::WeatherStatPane() {
 }
 void WeatherStatPane::updateWidgets() {
     //values for testing
-    double downSpeed = 15.643;
-    double tempFarenheit = 32.123;
-    double tempCelsius = 0.123;
+    QString downSpeed;
+    QString tempFarenheit;
+    QString tempCelsius;
 
     //setup file input
     QFile file(dataFileName);
@@ -31,23 +31,37 @@ void WeatherStatPane::updateWidgets() {
     QTextStream dataFile(&file);
 
     //read in the download and upload speed
-    downSpeed = dataFile.readLine().toDouble();
-    tempFarenheit = dataFile.readLine().toDouble();
-    tempCelsius = dataFile.readLine().toDouble();
+    downSpeed = dataFile.readLine();
+    tempFarenheit = dataFile.readLine();
+    tempCelsius = dataFile.readLine();
     file.close();
 
     QString downText = "Internet Speed: ";
-    downText.append(QString::number(downSpeed));
+
+    //if the DownSpeed was valid
+    if(downSpeed != "-")
+        downText.append(QString::number(downSpeed.toDouble()));
+    else
+        downText.append(QString("-"));
     downText.append("Mb/sec down");
 
     //setup the temperature labels
     QString tempText = "Temperature: ";
-    tempText.append(QString::number(tempFarenheit));
-    tempText.append(QChar(0260)).append("F");
 
+    //if the temperature was valid
+    if(tempFarenheit != "-")
+        tempText.append(QString::number(tempFarenheit.toDouble()));
+    else   
+        tempText.append(QString("-"));
+    tempText.append(QChar(0260)).append("F");
     //setup the celsius labels
     tempText.append(" / ");
-    tempText.append(QString::number(tempCelsius));
+
+    //if temperature was valid
+    if(tempCelsius != "-")
+        tempText.append(QString::number(tempCelsius.toDouble()));
+    else    
+        tempText.append(QString("-"));
     tempText.append(QChar(0260)).append("C");
 
     speedLbl->setText(downText);
