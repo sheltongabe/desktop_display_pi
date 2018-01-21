@@ -1,15 +1,15 @@
 downSpeedLbl
 color: #ced5e8;
-font-size: 36px;
+font-size: 48px;
 background-color: #47494f;
 ~
 farenheitLbl
 color: #ced5e8;
-font-size: 36px;
+font-size: 48px;
 background-color: #47494f;
 ~
 celsiusLbl
 color: #ced5e8;
-font-size: 36px;
+font-size: 48px;
 background-color: #47494f;
 ~

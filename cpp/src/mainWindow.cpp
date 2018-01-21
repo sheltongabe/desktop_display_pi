@@ -12,6 +12,9 @@ MainWindow::MainWindow() {
 
     //configure grid layout
     configureUI();
+
+    //set backlight state to on
+    blState = ON;
 }
 
 /*MainWindow::MainWindow(MainWindow& window) {
