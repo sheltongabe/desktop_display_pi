@@ -1,4 +1,5 @@
 import time, threading;
+from pi import PI;
 
 #variable for if the main loop should run
 shouldRun = True;
@@ -95,6 +96,7 @@ def temperature(ret):
         ret[0] = "-";
 
 def main():
+    pi = PI();
     while(shouldRun):
         #create variables
         speed = [0.0];
@@ -106,6 +108,11 @@ def main():
 
         #get the temperature
         temperature(temp);
+
+        #get the internal temp in degrees celsius
+        tempIntCel = 0.0;
+        if(pi.valid_import):
+            tempIntCel = pi.getTemp();
 
         #wait for the speed testing thread to be done
         t.join();
@@ -132,6 +139,14 @@ def main():
             #if temp failed write two hyphens for temps
             text += temp[0] + "\n";
             text += temp[0] + "\n";
+
+        #if the pi had valid imports
+        if(pi.valid_import()):
+            text += str(round(tempIntCel, 2)) + "\n";
+            tempIntFar = (9.0 / 5.0) * tempIntCel + 32;
+            text += str(round(tempIntFar, 2)) + "\n";
+        else:
+            text += "-\n-\n"
 
         #open a file to write to
         file = open("data.txt", "w");

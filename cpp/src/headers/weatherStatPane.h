@@ -27,6 +27,9 @@ class WeatherStatPane : public Pane {
         //Labels for gui for temperature
         QLabel* tempLbl;
 
+        //Label for Internal Temp
+        QLabel* intTempLbl;
+
         //Labels for internet speed
         QLabel* speedLbl;
 };

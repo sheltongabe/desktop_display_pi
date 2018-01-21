@@ -4,9 +4,11 @@ WeatherStatPane::WeatherStatPane() {
     //Create the widgets
     speedLbl = new QLabel();
     tempLbl = new QLabel();
+    intTempLbl = new QLabel();
 
     layout->addWidget(speedLbl, 0, 0);
     layout->addWidget(tempLbl, 1, 0);
+    layout->addWidget(intTempLbl, 2, 0);
     layout->setSpacing(0);
     layout->setMargin(0);
 
@@ -14,6 +16,7 @@ WeatherStatPane::WeatherStatPane() {
     styleMap = new StyleMap(StyleReader::read(":/styles/statPane.txt"));
     speedLbl->setStyleSheet(styleMap->getStyle("speedLbl"));
     tempLbl->setStyleSheet(styleMap->getStyle("tempLbl"));
+    intTempLbl->setStyleSheet(styleMap->getStyle("intTempLbl"));
 
     setLayout(layout);
 
@@ -23,6 +26,7 @@ void WeatherStatPane::updateWidgets() {
     QString downSpeed;
     QString tempFarenheit;
     QString tempCelsius;
+    QString intTempCel, intTempFar;
 
     //setup file input
     QFile file(dataFileName);
@@ -34,6 +38,8 @@ void WeatherStatPane::updateWidgets() {
     downSpeed = dataFile.readLine();
     tempFarenheit = dataFile.readLine();
     tempCelsius = dataFile.readLine();
+    intTempCel = dataFile.readLine();
+    intTempFar = dataFile.readLine();
     file.close();
 
     QString downText = "Internet Speed: ";
@@ -45,8 +51,9 @@ void WeatherStatPane::updateWidgets() {
         downText.append(QString("-"));
     downText.append("Mb/sec down");
 
-    //setup the temperature labels
-    QString tempText = "Temperature: ";
+    //--External temp
+    //setup the temperature label
+    QString tempText = "External Temperature: ";
 
     //if the temperature was valid
     if(tempFarenheit != "-")
@@ -64,8 +71,30 @@ void WeatherStatPane::updateWidgets() {
         tempText.append(QString("-"));
     tempText.append(QChar(0260)).append("C");
 
+    //--Internal Temp--
+    //setup the temperature label
+    QString intTempText = "Internal Temperature: ";
+
+    //if the temperature was valid
+    if(intTempFar != "-")
+        intTempText.append(QString::number(intTempFar.toDouble()));
+    else   
+        intTempText.append(QString("-"));
+    intTempText.append(QChar(0260)).append("F");
+    //setup the celsius labels
+    intTempText.append(" / ");
+
+    //if temperature was valid
+    if(intTempCel != "-")
+        intTempText.append(QString::number(intTempCel.toDouble()));
+    else    
+        intTempText.append(QString("-"));
+    intTempText.append(QChar(0260)).append("C");
+
+    //--write values to labels    
     speedLbl->setText(downText);
     tempLbl->setText(tempText);
+    intTempLbl->setText(intTempText);
 }
 
 WeatherStatPane::~WeatherStatPane() {
