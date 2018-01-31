@@ -68,6 +68,7 @@ def downloadSpeed(ret):
         ret[0] = float(FILE_SIZE) / deltaTime;
     except:
         ret[0] = "-";
+        print("ERROR: error getting download speed.");
 
 def temperature(ret):
     """
@@ -94,6 +95,7 @@ def temperature(ret):
         ret[0] = float(soup);
     except:
         ret[0] = "-";
+        print("ERROR: error getting temperature");
 
 def main():
     pi = PI();
