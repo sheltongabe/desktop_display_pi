@@ -16,7 +16,7 @@ class PI:
         """ pi.init()
             constructor to initialize class
         """
-        self._valid_import = VALID_IMPORT;
+        self._valid_import = False;
         
         #setup constants
         self._DO = 17;
