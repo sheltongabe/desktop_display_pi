@@ -5,6 +5,8 @@
 trap "exit" SIGINT SIGTERM 
 trap "kill 0" EXIT
 
+#make sure privelages are on the backlight
+sudo chmod 666 /sys/class/backlight/rpi_backlight/bl_power
 
 #start python utility code for speedtesting
 python3 tester.py &

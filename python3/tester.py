@@ -33,7 +33,7 @@ WEATHER_URL = "https://weather.com/weather/today/l/46229:4:US";
 FILE_NAME = "file";
 
 #Size of file in Megabits
-FILE_SIZE = 12 * 8;
+FILE_SIZE = 15 * 8;
 
 #get the current time
 currentTime = lambda: int(round(time.time() * 1000));
@@ -68,6 +68,7 @@ def downloadSpeed(ret):
         ret[0] = float(FILE_SIZE) / deltaTime;
     except:
         ret[0] = "-";
+        print("ERROR: error getting download speed.");
 
 def temperature(ret):
     """
@@ -94,6 +95,7 @@ def temperature(ret):
         ret[0] = float(soup);
     except:
         ret[0] = "-";
+        print("ERROR: error getting temperature");
 
 def main():
     pi = PI();
@@ -131,7 +133,7 @@ def main():
         #if temp was valid
         if(temp[0] != "-"):
             #output tempFarenheit
-            text += str(round(temp[0], 2)) + "\n";
+            text += str(round(temp[0])) + "\n";
 
             #output tempCelsius
             text += str(round((5.0 / 9.0) * (temp[0] - 32), 1)) + "\n";
@@ -142,9 +144,9 @@ def main():
 
         #if the pi had valid imports
         if(pi.valid_import()):
-            text += str(round(tempIntCel, 2)) + "\n";
+            text += str(round(tempIntCel, 1)) + "\n";
             tempIntFar = (9.0 / 5.0) * tempIntCel + 32;
-            text += str(round(tempIntFar, 2)) + "\n";
+            text += str(round(tempIntFar)) + "\n";
         else:
             text += "-\n-\n"
 
