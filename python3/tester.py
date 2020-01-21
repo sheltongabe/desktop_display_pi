@@ -36,7 +36,7 @@ WEATHER_URL = "https://weather.com/weather/today/l/46229:4:US"
 FILE_NAME = "file"
 
 #Size of file in Megabits
-FILE_SIZE = 15 * 8
+FILE_SIZE = 16 * 8
 
 #get the current time
 currentTime = lambda: int(round(time.time() * 1000))
@@ -117,7 +117,7 @@ def main():
 
         # Loop and allow the threads to execute till completion or timeout
         startTime = currentTime()
-        while (((currentTime() - startTime) / 1000.0 < SENSOR_TIMEOUT) and (temperatureThread.is_alive() and downloadThread.is_alive())):
+        while (((currentTime() - startTime) / 1000.0 < SENSOR_TIMEOUT) and (temperatureThread.is_alive() or downloadThread.is_alive())):
             time.sleep(0.5)
 
         #get the internal temp in degrees celsius
