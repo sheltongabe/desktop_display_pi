@@ -20,14 +20,14 @@ except ImportError:
 
 import os
 
-#interval of 30 sec
+#interval of 60 sec
 INTERVAL = 60
 
 # Timeout for reading the sensors
 SENSOR_TIMEOUT = 15
 
 #URL of test download file
-DOWNLOAD_URL = "http://mirror.steadfast.net/cygwin/x86_64/setup.ini"
+DOWNLOAD_URL = "http://mirror.steadfast.net/cygwin/x86_64/release/gimp/gimp-2.8.20-2-src.tar.xz"
 
 #URL for weather file
 WEATHER_URL = "https://weather.com/weather/today/l/46229:4:US"
@@ -36,7 +36,7 @@ WEATHER_URL = "https://weather.com/weather/today/l/46229:4:US"
 FILE_NAME = "file"
 
 #Size of file in Megabits
-FILE_SIZE = 16 * 8
+FILE_SIZE = 20 * 8
 
 #get the current time
 currentTime = lambda: int(round(time.time() * 1000))
@@ -55,7 +55,7 @@ def downloadSpeed(ret):
 
     try:
         #open and download the file
-        r = requests.get(DOWNLOAD_URL, stream = True, timeout=0.5)
+        r = requests.get(DOWNLOAD_URL, stream = True, timeout=10)
 
         #read the connection and write it to a file
         with open (FILE_NAME, 'wb') as file:
@@ -81,7 +81,7 @@ def temperature(ret):
     """
     try:
         #download a file for weather.com with the passed zip-code and country
-        r = requests.get(WEATHER_URL, stream = True, timeout=0.5)
+        r = requests.get(WEATHER_URL, stream = True, timeout=10)
         with open(FILE_NAME + ".html", 'w') as file:
             file.write(r.text)
 
