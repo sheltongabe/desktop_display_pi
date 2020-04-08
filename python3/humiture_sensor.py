@@ -6,17 +6,15 @@ GPIO.setmode(GPIO.BCM)
 ##
 # @class	HumitureSensor
 # Represent a Humidity sensor and find its value in a thread
-class HumitureSensor(Sensor):
+class HumitureSensor:
     HUMIDITY_MIN = 10
     HUMIDITY_MAX = 30
 
     def __init__(self):
-        super().__init__()
         self.NAME = 'humiture'
-        self._alarmLEDPIN = 24
-        self.registerSensor()
         self._LOOP_DELAY = 0.005
         self._SENSOR_PIN = 17
+        self._running = True
 
     ## Thread loop
     def run(self):
@@ -26,14 +24,8 @@ class HumitureSensor(Sensor):
                 humidity, temperature = result
                 self._data = humidity
 
-            self.updateAlarm()
             time.sleep(self._LOOP_DELAY)
 
-    ## Should this sensor alarm
-    def shouldAlarm(self):
-        humidity = self.getData()
-        return not (humidity > HumitureSensor.HUMIDITY_MIN and 
-            humidity < HumitureSensor.HUMIDITY_MAX)
 
     # Following code used from Sunfounder programmer DREAM provided under GPL License
     # link: https://github.com/sunfounder/SunFounder_SensorKit_for_RPi2/blob/master/Python/28_humiture.py
