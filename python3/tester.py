@@ -149,7 +149,7 @@ def main():
             text += temp[0] + "\n"
 
         #if the pi had valid imports
-        if pi.valid_import():
+        if pi.valid_import() and not tempIntCel == None:
             text += str(round(tempIntCel, 1)) + "\n"
             tempIntFar = (9.0 / 5.0) * tempIntCel + 32
             text += str(round(tempIntFar)) + "\n"
