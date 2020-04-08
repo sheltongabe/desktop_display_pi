@@ -55,8 +55,8 @@ def downloadSpeed(ret):
 
     try:
         #open and download the file
-        r = requests.get(DOWNLOAD_URL, stream = True)
-        
+        r = requests.get(DOWNLOAD_URL, stream = True, timeout=0.5)
+
         #read the connection and write it to a file
         with open (FILE_NAME, 'wb') as file:
             shutil.copyfileobj(r.raw, file)
@@ -81,7 +81,7 @@ def temperature(ret):
     """
     try:
         #download a file for weather.com with the passed zip-code and country
-        r = requests.get(WEATHER_URL, stream = True)
+        r = requests.get(WEATHER_URL, stream = True, timeout=0.5)
         with open(FILE_NAME + ".html", 'w') as file:
             file.write(r.text)
 
@@ -102,7 +102,7 @@ def temperature(ret):
 
 def main():
     pi = PI()
-    while(shouldRun):
+    while shouldRun:
         #create variables
         speed = ['-']
         temp = ['-']
@@ -112,24 +112,24 @@ def main():
         downloadThread.start()
 
         #get the temperature
-        temperatureThread = threading.Thread(target=temperature, args=[temp]);
+        temperatureThread = threading.Thread(target=temperature, args=[temp])
         temperatureThread.start()
 
         # Loop and allow the threads to execute till completion or timeout
         startTime = currentTime()
-        while (((currentTime() - startTime) / 1000.0 < SENSOR_TIMEOUT) and (temperatureThread.is_alive() or downloadThread.is_alive())):
+        while ((currentTime() - startTime) / 1000.0 < SENSOR_TIMEOUT) and (temperatureThread.is_alive() or downloadThread.is_alive()):
             time.sleep(0.5)
 
         #get the internal temp in degrees celsius
         tempIntCel = 0.0
-        if(pi.valid_import and not temperatureThread.is_alive()):
+        if pi.valid_import():
             tempIntCel = pi.getTemp()
 
         #setup the text to write to the file
         text = ""
 
         #if download speed is valid
-        if(not downloadThread.is_alive() and speed[0] != "-"):
+        if not downloadThread.is_alive() and speed[0] != "-":
             #output speed
             text += str(round(speed[0], 2)) + "\n"
         else:
@@ -137,7 +137,7 @@ def main():
             text += speed[0] + "\n"
 
         #if temp was valid
-        if(not temperatureThread.is_alive() and temp[0] != "-"):
+        if not temperatureThread.is_alive() and temp[0] != "-":
             #output tempFarenheit
             text += str(round(temp[0])) + "\n"
 
@@ -149,7 +149,7 @@ def main():
             text += temp[0] + "\n"
 
         #if the pi had valid imports
-        if(pi.valid_import() and not temperatureThread.is_alive()):
+        if pi.valid_import():
             text += str(round(tempIntCel, 1)) + "\n"
             tempIntFar = (9.0 / 5.0) * tempIntCel + 32
             text += str(round(tempIntFar)) + "\n"
@@ -163,5 +163,5 @@ def main():
 
         time.sleep(INTERVAL)
 
-if(__name__ == "__main__"):
+if __name__ == "__main__":
     main()
