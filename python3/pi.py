@@ -43,6 +43,7 @@ class PI:
             # return self.analogToTemp(ADC.read(0))
         else:
             return None
+            print('Error Reading internal Temperature.')
         return None
 
     def analogToTemp(self, analog):
